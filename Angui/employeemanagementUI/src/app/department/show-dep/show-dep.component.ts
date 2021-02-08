@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import{SharedService} from 'src/app/shared.service'
+import{SharedService} from 'src/app/shared.service';
 
 @Component({
   selector: 'app-show-dep',
@@ -9,10 +9,34 @@ import{SharedService} from 'src/app/shared.service'
 export class ShowDepComponent implements OnInit {
 
   constructor(private service:SharedService) { }
+  DepartmentList:any=[];
 
-  DepartmentList:any=[]
+  ModalTitle!: string;
+  item!:any;
+  ActivateAddEditDepComp:boolean=false;
+  dep!:any;
 
   ngOnInit(): void {
+    this.refreshDepList();
+  }
+
+  addClick(){
+    this.dep={
+      DepartmentId: 0,
+      DepartmentName:""
+    }
+    this.ModalTitle="Add Department";
+    this.ActivateAddEditDepComp=true;
+  }
+
+  editClick(item:any){
+  this.dep=item;
+  this.ModalTitle="Edit Department";
+  this.ActivateAddEditDepComp=true;
+  }
+
+  closeClick(){
+    this.ActivateAddEditDepComp=false;
     this.refreshDepList();
   }
 
