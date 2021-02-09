@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+
+import { Component, OnInit,Input } from '@angular/core';
 import {SharedService} from 'src/app/shared.service';
 
 @Component({
@@ -10,19 +11,18 @@ export class AddEditDepComponent implements OnInit {
 
   constructor(private service:SharedService) { }
 
-  @Input()
-  dep:any[];
+  @Input() dep:any;
   DepartmentId:string;
   DepartmentName:string;
 
   ngOnInit(): void {
-    this.DepartmentId=this.DepartmentId;
-    this.DepartmentName=this.DepartmentName;
+    this.DepartmentId=this.dep.DepartmentId;
+    this.DepartmentName=this.dep.DepartmentName;
   }
 
   addDepartment(){
     var val = {DepartmentId:this.DepartmentId,
-               DepartmentName:this.DepartmentName};
+                DepartmentName:this.DepartmentName};
     this.service.addDepartment(val).subscribe(res=>{
       alert(res.toString());
     });
@@ -30,9 +30,9 @@ export class AddEditDepComponent implements OnInit {
 
   updateDepartment(){
     var val = {DepartmentId:this.DepartmentId,
-               DepartmentName:this.DepartmentName};
+      DepartmentName:this.DepartmentName};
     this.service.updateDepartment(val).subscribe(res=>{
-      alert(res.toString());
+    alert(res.toString());
     });
   }
 }
